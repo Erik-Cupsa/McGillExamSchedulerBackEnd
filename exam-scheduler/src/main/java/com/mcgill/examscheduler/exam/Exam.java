@@ -1,49 +1,67 @@
 package com.mcgill.examscheduler.exam;
 
-import java.sql.Timestamp;
+import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "w2023")
 public class Exam {
+    @Id
+    @SequenceGenerator(
+            name = "mcgillexams_sequence",
+            sequenceName = "mcgillexams_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "mcgillexams_sequence"
+    )
     private String course;
     private String section;
-    private String courseTitle;
-    private String examType;
-    private Timestamp examStart;
-    private Timestamp examEnd;
+    private String course_title;
+    private String exam_type;
+    private LocalDateTime exam_start_time;
+    private LocalDateTime exam_end_time;
     private String building;
     private String room;
-    private String rows;
-    private String rowStart;
-    private String rowEnd;
+    private String rows_from;
+    private String row_start;
+    private String row_end;
 
-    public Exam(String course, String section, String courseTitle, String examType, Timestamp examStart, Timestamp examEnd, String building, String room, String rows, String rowStart, String rowEnd) {
+
+    public Exam(String course, String section, String course_title, String exam_type, LocalDateTime exam_start_time, LocalDateTime exam_end_time, String building, String room, String rows_from, String row_start, String row_end) {
         this.course = course;
         this.section = section;
-        this.courseTitle = courseTitle;
-        this.examType = examType;
-        this.examStart = examStart;
-        this.examEnd = examEnd;
+        this.course_title = course_title;
+        this.exam_type = exam_type;
+        this.exam_start_time = exam_start_time;
+        this.exam_end_time = exam_end_time;
         this.building = building;
         this.room = room;
-        this.rows = rows;
-        this.rowStart = rowStart;
-        this.rowEnd = rowEnd;
+        this.rows_from = rows_from;
+        this.row_start = row_start;
+        this.row_end = row_end;
     }
 
-    public Exam(String course, String section, String courseTitle, String examType, Timestamp examStart, Timestamp examEnd, String building, String room, String rowStart, String rowEnd) {
+    public Exam(String course, String section, String course_title, String exam_type, LocalDateTime exam_start_time, LocalDateTime exam_end_time, String building, String room, String row_start, String row_end) {
         this.course = course;
         this.section = section;
-        this.courseTitle = courseTitle;
-        this.examType = examType;
-        this.examStart = examStart;
-        this.examEnd = examEnd;
+        this.course_title = course_title;
+        this.exam_type = exam_type;
+        this.exam_start_time = exam_start_time;
+        this.exam_end_time = exam_end_time;
         this.building = building;
         this.room = room;
-        this.rows = null;
-        this.rowStart = rowStart;
-        this.rowEnd = rowEnd;
+        this.rows_from = null;
+        this.row_start = row_start;
+        this.row_end = row_end;
     }
 
     public Exam() {
+
     }
 
     public String getCourse() {
@@ -54,20 +72,20 @@ public class Exam {
         return section;
     }
 
-    public String getCourseTitle() {
-        return courseTitle;
+    public String getcourse_title() {
+        return course_title;
     }
 
-    public String getExamType() {
-        return examType;
+    public String getexam_type() {
+        return exam_type;
     }
 
-    public Timestamp getExamStart() {
-        return examStart;
+    public LocalDateTime getexam_start_time() {
+        return exam_start_time;
     }
 
-    public Timestamp getExamEnd() {
-        return examEnd;
+    public LocalDateTime getexam_end_time() {
+        return exam_end_time;
     }
 
     public String getBuilding() {
@@ -79,15 +97,15 @@ public class Exam {
     }
 
     public String getRows() {
-        return rows;
+        return rows_from;
     }
 
     public String getRowStart() {
-        return rowStart;
+        return row_start;
     }
 
     public String getRowEnd() {
-        return rowEnd;
+        return row_end;
     }
 
     public void setCourse(String course) {
@@ -98,20 +116,20 @@ public class Exam {
         this.section = section;
     }
 
-    public void setCourseTitle(String courseTitle) {
-        this.courseTitle = courseTitle;
+    public void setcourse_title(String course_title) {
+        this.course_title = course_title;
     }
 
-    public void setExamType(String examType) {
-        this.examType = examType;
+    public void setexam_type(String exam_type) {
+        this.exam_type = exam_type;
     }
 
-    public void setExamStart(Timestamp examStart) {
-        this.examStart = examStart;
+    public void setexam_start_time(LocalDateTime exam_start_time) {
+        this.exam_start_time = exam_start_time;
     }
 
-    public void setExamEnd(Timestamp examEnd) {
-        this.examEnd = examEnd;
+    public void setexam_end_time(LocalDateTime exam_end_time) {
+        this.exam_end_time = exam_end_time;
     }
 
     public void setBuilding(String building) {
@@ -122,16 +140,16 @@ public class Exam {
         this.room = room;
     }
 
-    public void setRows(String rows) {
-        this.rows = rows;
+    public void setRows(String rows_from) {
+        this.rows_from = rows_from;
     }
 
-    public void setRowStart(String rowStart) {
-        this.rowStart = rowStart;
+    public void setRowStart(String row_start) {
+        this.row_start = row_start;
     }
 
-    public void setRowEnd(String rowEnd) {
-        this.rowEnd = rowEnd;
+    public void setRowEnd(String row_end) {
+        this.row_end = row_end;
     }
 
     @Override
@@ -139,15 +157,15 @@ public class Exam {
         return "Exam{" +
                 "course='" + course + '\'' +
                 ", section='" + section + '\'' +
-                ", courseTitle='" + courseTitle + '\'' +
-                ", examType='" + examType + '\'' +
-                ", examStart=" + examStart +
-                ", examEnd=" + examEnd +
+                ", course_title='" + course_title + '\'' +
+                ", exam_type='" + exam_type + '\'' +
+                ", exam_start_time=" + exam_start_time +
+                ", exam_end_time=" + exam_end_time +
                 ", building='" + building + '\'' +
                 ", room='" + room + '\'' +
-                ", rows='" + rows + '\'' +
-                ", rowStart='" + rowStart + '\'' +
-                ", rowEnd='" + rowEnd + '\'' +
+                ", rows_from='" + rows_from + '\'' +
+                ", row_start='" + row_start + '\'' +
+                ", row_end='" + row_end + '\'' +
                 '}';
     }
 }
