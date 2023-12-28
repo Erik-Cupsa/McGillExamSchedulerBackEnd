@@ -1,18 +1,31 @@
 package com.mcgill.examscheduler.exam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Service
+@Component
 public class ExamService {
-    @GetMapping
-    public List<Exam> getExams(){
-        return List.of(
-                new Exam(
-                )
-        );
+    private final ExamRepository examRepository;
+
+    @Autowired
+    public ExamService(ExamRepository examRepository) {
+        this.examRepository = examRepository;
     }
+
+    public List<Exam> getExams(){
+       return examRepository.findAll();
+    }
+
+    public List<Exam> getExamsByClass(String className) {
+        return examRepository.findAll().stream()
+                .filter(exam -> className.equals(exam.getCourse()))
+                .collect(Collectors.toList());
+    }
+
+//    public List<Exam> invalidEntry(String className) {
+//    }
 }
