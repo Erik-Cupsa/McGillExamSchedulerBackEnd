@@ -22,7 +22,7 @@ public class ExamService {
 
     public List<Exam> getExamsByClass(String className) {
         return examRepository.findAll().stream()
-                .filter(exam -> className.equals(exam.getCourse()))
+                .filter(exam -> exam.getCourse().toLowerCase().contains(className.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
