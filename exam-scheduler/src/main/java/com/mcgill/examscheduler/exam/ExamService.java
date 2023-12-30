@@ -26,6 +26,8 @@ public class ExamService {
                 .collect(Collectors.toList());
     }
 
-//    public List<Exam> invalidEntry(String className) {
-//    }
+    public Exam addExam(Exam newExam) {
+        // Implement validation or other necessary logic
+        return examRepository.save(newExam);
+    }
 }
