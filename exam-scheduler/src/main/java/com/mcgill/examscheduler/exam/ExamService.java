@@ -22,10 +22,12 @@ public class ExamService {
 
     public List<Exam> getExamsByClass(String className) {
         return examRepository.findAll().stream()
-                .filter(exam -> className.equals(exam.getCourse()))
+                .filter(exam -> exam.getCourse().toLowerCase().contains(className.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
-//    public List<Exam> invalidEntry(String className) {
-//    }
+    public Exam addExam(Exam newExam) {
+        // Implement validation or other necessary logic
+        return examRepository.save(newExam);
+    }
 }

@@ -10,15 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "w2023")
 public class Exam {
     @Id
-    @SequenceGenerator(
-            name = "mcgillexams_sequence",
-            sequenceName = "mcgillexams_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "mcgillexams_sequence"
-    )
+    @Column(name = "course")
     private String course;
     private String section;
     private String course_title;
