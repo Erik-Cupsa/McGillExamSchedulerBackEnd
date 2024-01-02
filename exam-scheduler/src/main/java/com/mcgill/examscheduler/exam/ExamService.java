@@ -51,4 +51,11 @@ public class ExamService {
         }
         return null;
     }
+
+    public void deleteExam(Exam exam){
+        Optional<Exam> optionalExam = examRepository.findById(exam.getCourse());
+        if (optionalExam.isPresent()) {
+            examRepository.deleteById(exam.getCourse());
+        }
+    }
 }
