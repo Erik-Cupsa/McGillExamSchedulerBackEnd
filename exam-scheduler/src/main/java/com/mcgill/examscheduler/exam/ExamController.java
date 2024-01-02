@@ -34,4 +34,14 @@ public class ExamController {
         Exam createdExam = examService.addExam(newExam);
         return new ResponseEntity<>(createdExam, HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public ResponseEntity<Exam> updateExam(@PathVariable Long examId, @RequestBody Exam exam) {
+        Exam updatedExam = examService.updateExam(examId, exam);
+        if (updatedExam != null) {
+            return new ResponseEntity<>(updatedExam, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
