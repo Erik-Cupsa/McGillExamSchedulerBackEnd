@@ -46,19 +46,15 @@ public class ExamController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Exam> deleteExam(@RequestParam(required = false) String courseName){
-        if (courseName != null){
-            List<Exam> toDelete = examService.getExamsByClass(courseName);
-            int i = 0;
-            while(i < toDelete.size()){
-                Exam currExam = toDelete.get(i);
-                examService.deleteExam(currExam);
-                i++;
+    public ResponseEntity<Void> deleteExamsByClassName(@RequestParam(required = false) String className) {
+        if (className != null) {
+            List<Exam> toDelete = examService.getExamsByClass(className);
+            for (Exam exam : toDelete) {
+                examService.deleteExam(exam);
             }
-            return ResponseEntity.noContent().build();
-        }
-        else{
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build(); // Return 204 No Content on successful deletion
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
