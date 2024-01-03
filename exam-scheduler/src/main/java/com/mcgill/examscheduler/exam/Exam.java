@@ -3,15 +3,19 @@ package com.mcgill.examscheduler.exam;
 import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "w2023")
-public class Exam {
+@IdClass(ExamKey.class)
+public class Exam implements Serializable {
     @Id
     @Column(name = "course")
     private String course;
+    @Id
+    @Column(name = "section")
     private String section;
     private String course_title;
     private String exam_type;
@@ -159,5 +163,14 @@ public class Exam {
                 ", row_start='" + row_start + '\'' +
                 ", row_end='" + row_end + '\'' +
                 '}';
+    }
+
+    public ExamKey getExamKey() {
+        return new ExamKey(this.course, this.section);
+    }
+
+    public void setExamKey(ExamKey examKey) {
+        this.course = examKey.getCourse();
+        this.section = examKey.getSection();
     }
 }
