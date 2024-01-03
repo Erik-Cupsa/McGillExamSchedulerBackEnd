@@ -34,4 +34,27 @@ public class ExamController {
         Exam createdExam = examService.addExam(newExam);
         return new ResponseEntity<>(createdExam, HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public ResponseEntity<Exam> updateExam(@PathVariable String courseName, @RequestBody Exam exam) {
+        Exam updatedExam = examService.updateExam(courseName, exam);
+        if (updatedExam != null) {
+            return new ResponseEntity<>(updatedExam, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteExamsByClassName(@RequestParam(required = false) String className) {
+        if (className != null) {
+            List<Exam> toDelete = examService.getExamsByClass(className);
+            for (Exam exam : toDelete) {
+                examService.deleteExam(exam);
+            }
+            return ResponseEntity.noContent().build(); // Return 204 No Content on successful deletion
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
