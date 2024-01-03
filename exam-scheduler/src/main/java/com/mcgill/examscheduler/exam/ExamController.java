@@ -36,8 +36,8 @@ public class ExamController {
     }
 
     @PutMapping
-    public ResponseEntity<Exam> updateExam(@PathVariable String courseName, @RequestBody Exam exam) {
-        Exam updatedExam = examService.updateExam(courseName, exam);
+    public ResponseEntity<Exam> updateExam(@RequestParam(required = false) String className, @RequestBody Exam exam) {
+        Exam updatedExam = examService.updateExam(className, exam);
         if (updatedExam != null) {
             return new ResponseEntity<>(updatedExam, HttpStatus.OK);
         } else {
