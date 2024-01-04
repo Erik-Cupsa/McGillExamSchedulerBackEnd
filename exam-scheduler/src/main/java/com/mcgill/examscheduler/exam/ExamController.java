@@ -36,22 +36,26 @@ public class ExamController {
     }
 
     @PutMapping
-    public ResponseEntity<Exam> updateExam(@PathVariable String courseName, @RequestBody Exam exam) {
-        Exam updatedExam = examService.updateExam(courseName, exam);
-        if (updatedExam != null) {
-            return new ResponseEntity<>(updatedExam, HttpStatus.OK);
+    public ResponseEntity<Exam> updateExam(@RequestParam String className, @RequestParam String section, @RequestBody Exam updatedExam) {
+        // Create an ExamKey object based on the course and section
+        ExamKey examKey = new ExamKey(className, section);
+
+        // Pass the composite key and the updated exam details to the service method
+        Exam resultExam = examService.updateExam(examKey, updatedExam);
+
+        if (resultExam != null) {
+            return new ResponseEntity<>(resultExam, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
+
     @DeleteMapping
-    public ResponseEntity<Void> deleteExamsByClassName(@RequestParam(required = false) String className) {
-        if (className != null) {
-            List<Exam> toDelete = examService.getExamsByClass(className);
-            for (Exam exam : toDelete) {
-                examService.deleteExam(exam);
-            }
+    public ResponseEntity<Void> deleteExamsByClassName(@RequestParam(required = false) String className, @RequestParam(required = false) String section) {
+        if (className != null && section != null) {
+            ExamKey examKey = new ExamKey(className, section);
+            examService.deleteExam(examKey);
             return ResponseEntity.noContent().build(); // Return 204 No Content on successful deletion
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

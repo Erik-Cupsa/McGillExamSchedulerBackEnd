@@ -1,5 +1,6 @@
 package com.mcgill.examscheduler.exam;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -28,16 +29,15 @@ public class ExamService {
     }
 
     public Exam addExam(Exam newExam) {
-        // Implement validation or other necessary logic
         return examRepository.save(newExam);
     }
 
-    public Exam updateExam(String courseName, Exam updatedExam) {
-        Optional<Exam> optionalExam = examRepository.findById(courseName);
+    public Exam updateExam(ExamKey examKey, Exam updatedExam) {
+        Optional<Exam> optionalExam = examRepository.findByCourseAndSection(examKey.getCourse(), examKey.getSection());
         if (optionalExam.isPresent()) {
             Exam currExam = optionalExam.get();
-            currExam.setCourse(updatedExam.getCourse());
-            currExam.setSection(updatedExam.getSection());
+//            currExam.setCourse(examKey.getCourse());
+//            currExam.setSection(examKey.getSection());
             currExam.setcourse_title(updatedExam.getcourse_title());
             currExam.setexam_type(updatedExam.getexam_type());
             currExam.setexam_start_time(updatedExam.getexam_start_time());
@@ -51,11 +51,11 @@ public class ExamService {
         }
         return null;
     }
-
-    public void deleteExam(Exam exam){
-        Optional<Exam> optionalExam = examRepository.findById(exam.getCourse());
-        if (optionalExam.isPresent()) {
-            examRepository.deleteById(exam.getCourse());
+    @Transactional
+    public void deleteExam(ExamKey examKey){
+        Optional<Exam> deletedExam = examRepository.findByCourseAndSection(examKey.getCourse(), examKey.getSection());
+        if (deletedExam.isPresent()) {
+            examRepository.deleteByCourseAndSection(examKey.getCourse(), examKey.getSection());
         }
     }
 }
