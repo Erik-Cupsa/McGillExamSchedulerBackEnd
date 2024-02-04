@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "w2023")
+@Table(name = "w2024")
 @IdClass(ExamKey.class)
 public class Exam implements Serializable {
     @Id
