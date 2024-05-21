@@ -1,9 +1,10 @@
 package com.mcgill.examscheduler.exam;
 
+import com.mcgill.examscheduler.exam.Model.Exam;
+import com.mcgill.examscheduler.exam.Model.ExamKey;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;

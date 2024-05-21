@@ -1,5 +1,6 @@
 package com.mcgill.examscheduler.exam;
 
+import com.mcgill.examscheduler.exam.Model.Exam;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

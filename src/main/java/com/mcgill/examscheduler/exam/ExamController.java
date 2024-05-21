@@ -1,5 +1,7 @@
 package com.mcgill.examscheduler.exam;
 
+import com.mcgill.examscheduler.exam.Model.Exam;
+import com.mcgill.examscheduler.exam.Model.ExamKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

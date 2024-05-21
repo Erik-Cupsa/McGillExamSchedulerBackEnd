@@ -1,4 +1,4 @@
-package com.mcgill.examscheduler.exam;
+package com.mcgill.examscheduler.exam.Model;
 import java.io.Serializable;
 import java.util.Objects;
 
