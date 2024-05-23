@@ -1,6 +1,6 @@
 package com.mcgill.examscheduler.exam.service;
 
-import com.mcgill.examscheduler.exam.ExamRepository;
+import com.mcgill.examscheduler.exam.repo.ExamRepository;
 import com.mcgill.examscheduler.exam.model.Exam;
 import com.mcgill.examscheduler.exam.model.ExamKey;
 import jakarta.transaction.Transactional;
