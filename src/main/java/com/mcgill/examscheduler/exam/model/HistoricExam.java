@@ -1,4 +1,4 @@
-package com.mcgill.examscheduler.exam.Model;
+package com.mcgill.examscheduler.exam.model;
 
 import jakarta.persistence.*;
 
@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "historic_exams")
-@IdClass(Historic_Exams_Key.class)
-public class Historic_Exams {
+@IdClass(HistoricExamKey.class)
+public class HistoricExam {
     @Id
     @Column(name = "course")
     private String course;
@@ -27,7 +27,7 @@ public class Historic_Exams {
     private String row_start;
     private String row_end;
 
-    public Historic_Exams(String course, String section, String year, String course_title, String exam_type, LocalDateTime exam_start_time, LocalDateTime exam_end_time, String building, String room, String rows_from, String row_start, String row_end) {
+    public HistoricExam(String course, String section, String year, String course_title, String exam_type, LocalDateTime exam_start_time, LocalDateTime exam_end_time, String building, String room, String rows_from, String row_start, String row_end) {
         this.course = course;
         this.section = section;
         this.year = year;
@@ -42,7 +42,7 @@ public class Historic_Exams {
         this.row_end = row_end;
     }
 
-    public Historic_Exams(){
+    public HistoricExam(){
 
     }
 

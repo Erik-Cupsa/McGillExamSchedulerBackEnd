@@ -1,4 +1,4 @@
-package com.mcgill.examscheduler.exam.Model;
+package com.mcgill.examscheduler.exam.model;
 
 import jakarta.persistence.*;
 

@@ -1,7 +1,8 @@
-package com.mcgill.examscheduler.exam;
+package com.mcgill.examscheduler.exam.service;
 
-import com.mcgill.examscheduler.exam.Model.Exam;
-import com.mcgill.examscheduler.exam.Model.ExamKey;
+import com.mcgill.examscheduler.exam.ExamRepository;
+import com.mcgill.examscheduler.exam.model.Exam;
+import com.mcgill.examscheduler.exam.model.ExamKey;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,21 +1,18 @@
-package com.mcgill.examscheduler.exam.Model;
-
+package com.mcgill.examscheduler.exam.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Historic_Exams_Key implements Serializable {
+public class ExamKey implements Serializable {
     private String course;
     private String section;
-    private String year;
 
-    public Historic_Exams_Key() {
-
+    // Constructors
+    public ExamKey() {
     }
 
-    public Historic_Exams_Key(String course, String section, String year) {
+    public ExamKey(String course, String section) {
         this.course = course;
         this.section = section;
-        this.year = year;
     }
 
     public String getCourse() {
@@ -34,24 +31,17 @@ public class Historic_Exams_Key implements Serializable {
         this.section = section;
     }
 
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Historic_Exams_Key that = (Historic_Exams_Key) o;
-        return Objects.equals(course, that.course) && Objects.equals(section, that.section) && Objects.equals(year, that.year);
+        ExamKey examKey = (ExamKey) o;
+        return Objects.equals(course, examKey.course) &&
+                Objects.equals(section, examKey.section);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(course, section, year);
+        return Objects.hash(course, section);
     }
 }
