@@ -2,8 +2,6 @@ package com.mcgill.examscheduler.exam.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "historic_exams")
 @IdClass(HistoricExamKey.class)
@@ -17,21 +15,19 @@ public class HistoricExam {
     @Id
     @Column(name = "year")
     private String year;
-    private String course_title;
     private String exam_type;
-    private LocalDateTime exam_start_time;
-    private LocalDateTime exam_end_time;
+    private String exam_start_time;
+    private String exam_end_time;
     private String building;
     private String room;
     private String rows_from;
     private String row_start;
     private String row_end;
 
-    public HistoricExam(String course, String section, String year, String course_title, String exam_type, LocalDateTime exam_start_time, LocalDateTime exam_end_time, String building, String room, String rows_from, String row_start, String row_end) {
+    public HistoricExam(String course, String section, String year, String exam_type, String exam_start_time, String exam_end_time, String building, String room, String rows_from, String row_start, String row_end) {
         this.course = course;
         this.section = section;
         this.year = year;
-        this.course_title = course_title;
         this.exam_type = exam_type;
         this.exam_start_time = exam_start_time;
         this.exam_end_time = exam_end_time;
@@ -70,13 +66,6 @@ public class HistoricExam {
         this.year = year;
     }
 
-    public String getCourse_title() {
-        return course_title;
-    }
-
-    public void setCourse_title(String course_title) {
-        this.course_title = course_title;
-    }
 
     public String getExam_type() {
         return exam_type;
@@ -86,19 +75,19 @@ public class HistoricExam {
         this.exam_type = exam_type;
     }
 
-    public LocalDateTime getExam_start_time() {
+    public String getExam_start_time() {
         return exam_start_time;
     }
 
-    public void setExam_start_time(LocalDateTime exam_start_time) {
+    public void setExam_start_time(String exam_start_time) {
         this.exam_start_time = exam_start_time;
     }
 
-    public LocalDateTime getExam_end_time() {
+    public String getExam_end_time() {
         return exam_end_time;
     }
 
-    public void setExam_end_time(LocalDateTime exam_end_time) {
+    public void setExam_end_time(String exam_end_time) {
         this.exam_end_time = exam_end_time;
     }
 
