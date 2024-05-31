@@ -1,10 +1,8 @@
-package com.mcgill.examscheduler.exam;
+package com.mcgill.examscheduler.exam.model;
 
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity

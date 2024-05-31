@@ -1,5 +1,8 @@
-package com.mcgill.examscheduler.exam;
+package com.mcgill.examscheduler.exam.controller;
 
+import com.mcgill.examscheduler.exam.service.ExamService;
+import com.mcgill.examscheduler.exam.model.Exam;
+import com.mcgill.examscheduler.exam.model.ExamKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,11 @@ public class ExamController {
         else{
             return examService.getExams();
         }
+    }
+
+    @GetMapping("/multiple")
+    public List<Exam> getExamsByNames(@RequestParam("names") List<String> examNames) {
+        return examService.getExamsByNames(examNames);
     }
 
     @PostMapping

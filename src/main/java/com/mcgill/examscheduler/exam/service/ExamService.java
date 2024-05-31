@@ -1,9 +1,11 @@
-package com.mcgill.examscheduler.exam;
+package com.mcgill.examscheduler.exam.service;
 
+import com.mcgill.examscheduler.exam.repo.ExamRepository;
+import com.mcgill.examscheduler.exam.model.Exam;
+import com.mcgill.examscheduler.exam.model.ExamKey;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,5 +59,16 @@ public class ExamService {
         if (deletedExam.isPresent()) {
             examRepository.deleteByCourseAndSection(examKey.getCourse(), examKey.getSection());
         }
+    }
+
+    public List<Exam> getExamsByNames(List<String> examNames) {
+        List<String> lowercaseExamNames = examNames.stream()
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
+
+        // Filter exams by class names provided in the list
+        return examRepository.findAll().stream()
+                .filter(exam -> lowercaseExamNames.contains(exam.getCourse().toLowerCase()))
+                .collect(Collectors.toList());
     }
 }
