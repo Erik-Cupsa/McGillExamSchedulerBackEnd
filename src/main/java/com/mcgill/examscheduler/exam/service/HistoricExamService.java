@@ -5,7 +5,9 @@ import com.mcgill.examscheduler.exam.repo.HistoricExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -18,6 +20,7 @@ public class HistoricExamService {
     }
 
     public List<HistoricExam> getExamsByNameAndYear(List<String> classNames, List<String> years) {
+        Set<String> uniqueCombinations = new HashSet<>();
         List<String> lowercaseHistoricExamNames = classNames.stream()
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
@@ -28,8 +31,12 @@ public class HistoricExamService {
 
         // Filter exams by class names provided in the list
         return historicExamRepository.findAll().stream()
-                .filter(historicExam -> lowercaseHistoricExamNames.contains(historicExam.getCourse().toLowerCase())
-                        && lowercaseYears.contains(historicExam.getYear().toLowerCase()))
+                .filter(historicExam -> {
+                    String combination = historicExam.getCourse().toLowerCase() + historicExam.getYear().toLowerCase();
+                    boolean isNewCombination = uniqueCombinations.add(combination);
+                    return isNewCombination && lowercaseHistoricExamNames.contains(historicExam.getCourse().toLowerCase())
+                            && lowercaseYears.contains(historicExam.getYear().toLowerCase());
+                })
                 .collect(Collectors.toList());
     }
 }
