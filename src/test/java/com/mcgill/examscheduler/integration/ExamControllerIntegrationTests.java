@@ -20,9 +20,6 @@ public class ExamControllerIntegrationTests {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ExamRepository examRepository;
-
     @Test
     public void testGetExams() throws Exception {
         mockMvc.perform(get("/api/v1/exam"))
@@ -47,6 +44,4 @@ public class ExamControllerIntegrationTests {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$").isEmpty());
     }
-
-
 }
